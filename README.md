@@ -4,7 +4,6 @@ Simple colour palette from image extension for Inkscape.
 
 ------------------------------------------------------------------------------------------------------------------------------
 Disclaimer: I only started using Inkscape in the past few months and my Python sucks so I'll be happy to have input.
-------------------------------------------------------------------------------------------------------------------------------
 
 This was created with the sole purpose of being able to create an on-screen palette using SVG rectangles set to the colours
 from an image. I found myself using https://color.adobe.com/ colour palettes in a lot of my projects which meant downloading
