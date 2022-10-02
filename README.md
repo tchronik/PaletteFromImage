@@ -17,3 +17,8 @@ Save these files on your PC under this path:
 C:\Users\<your username>\AppData\Roaming\inkscape\extensions
 
 In Inkscape, under extensions, go to Image -> Palette From Image...
+
+Screenshot
+------------
+
+![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/PaletteFromImage.PNG?raw=true)
