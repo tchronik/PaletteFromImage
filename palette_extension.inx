@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Palette From Image</name>
+  <id>org.inkscape.palette_from_image</id>
+  <vbox>
+    <label>Swatch Options</label>
+    <separator />
+    <param name="swatchSize" type="int" min="25" max="50" gui-text="Swatch Size:">50</param>
+    <param name="swatchSpacing" type="int" min="10" max="25" gui-text="Swatch Spacing:">10</param>
+    <param name="numPaletteSwatches" type="int" min="1" max="16" gui-text="Num Swatches In Palette:">5</param>
+    <separator />
+    <param name="showHexCode" type="bool" gui-text="Show Hex Code">false</param>
+    <separator />
+    <label>Text Color</label>
+    <param name="textColor" type="color" gui-text="Text Color"></param>
+  </vbox>
+  <separator />
+  <vbox>
+    <label>Palette Options</label>
+    <separator />
+    <param name="ignoreWhiteInPalette" type="bool" gui-text="Ignore White In Palette">true</param>
+    <param name="orientation" gui-text="Palette Orientation:" type="optiongroup" appearance="radio">
+      <option translatable="no" value="Top">Top</option>
+      <option translatable="no" value="Bottom">Bottom</option>
+      <option translatable="no" value="Left">Left</option>
+      <option translatable="no" value="Right">Right</option>
+    </param>
+    <separator />
+    <param name="imagePath" type="path" gui-text="Image Path:" filetypes="jpeg,jpg" mode="file"/>
+  </vbox>
+  <effect needs-live-preview="true">
+    <effects-menu>
+      <submenu name="Images"/>
+    </effects-menu>
+  </effect>
+  <script>
+    <command location="inx" interpreter="python">palette_from_image.py</command>
+  </script>
+</inkscape-extension>
