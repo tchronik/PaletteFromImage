@@ -1,0 +1,2 @@
+# ignore all .code-workspace files
+*.code-workspace

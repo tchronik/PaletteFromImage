@@ -116,6 +116,25 @@ class PaletteGeneratorExtension(inkex.GenerateExtension):
                         default="Top",
                         help="Orientation for the color swatches.")
 
+    def create_palette_from_selection(self, num_palette_swatches, colours):
+        sel = self.svg.selected
+        bbox = sel.bounding_box()
+        selSize = bbox.max - bbox.min
+
+        box_width = selSize.x / num_palette_swatches
+        box_height = selSize.y
+
+        for index in num_palette_swatches.range():
+            col = colours[index]
+            colHex = rgb2hex(col)
+
+            colStyle = {'fill' : colHex}
+            
+            x_pos = bbox.min.x + (index * box_width)
+            y_pos = bbox.min.x
+
+            self.rect((x_pos, y_pos), (box_width, box_height), round=0, style=colStyle)
+
     def generate(self):
         swatch_size = self.options.swatchSize
         swatch_spacing = self.options.swatchSpacing
@@ -137,6 +156,9 @@ class PaletteGeneratorExtension(inkex.GenerateExtension):
 
         page_width = self.svg.viewbox_width
         page_height = self.svg.viewbox_height
+
+        self.create_palette_from_selection(num_palette_swatches, colors)
+        return
 
         index = 0
 
