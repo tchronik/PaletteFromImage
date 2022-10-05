@@ -17,6 +17,15 @@ C:\Users\<your username>\AppData\Roaming\inkscape\extensions
 
 Then in Inkscape, under extensions, go to Image -> Palette From Image...
 
+Palette Images
+--------------
+
+In theory, any image can be used to generate a palette from. However, there is currently no support to average out colours in the image and sometimes the resulting palette might not be as accurate as one might like. The initial design for this extension was to be used in combination with the Adobe Color palette images that you can download on their site or create your own to download.
+
+Here is an example of the colour palette used to produce the below image.
+
+![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/ExamplePalette.jpeg?raw=true)
+
 Options
 ------------
 
