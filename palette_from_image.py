@@ -23,6 +23,7 @@ using SVG rectangles that a user can then eye-drop on to set colours in their do
 
 """
 
+from sys import stderr
 import inkex
 import PIL.Image
 
@@ -116,58 +117,69 @@ class PaletteGeneratorExtension(inkex.GenerateExtension):
                         default="Top",
                         help="Orientation for the color swatches.")
 
-    def create_palette_from_selection(self, num_palette_swatches, colours):
-        sel = self.svg.selected
-        bbox = sel.bounding_box()
-        selSize = bbox.max - bbox.min
+        pars.add_argument('--useSelection', type=inkex.Boolean,
+                        help='Whether we want to create a standalone palette or one from our selection.')
 
-        box_width = selSize.x / num_palette_swatches
-        box_height = selSize.y
-
-        for index in num_palette_swatches.range():
-            col = colours[index]
-            colHex = rgb2hex(col)
-
-            colStyle = {'fill' : colHex}
-            
-            x_pos = bbox.min.x + (index * box_width)
-            y_pos = bbox.min.x
-
-            self.rect((x_pos, y_pos), (box_width, box_height), round=0, style=colStyle)
-
-    def generate(self):
-        swatch_size = self.options.swatchSize
-        swatch_spacing = self.options.swatchSpacing
-        image_filename = self.options.imagePath
-        show_hex_code = self.options.showHexCode
-        ignore_white_in_palette = self.options.ignoreWhiteInPalette
-        num_palette_swatches = self.options.numPaletteSwatches
-        orientation = self.options.orientation
-        text_color = self.options.textColor
-
-        # Add just a bit of flare!
-        radius = 2
-
-        colors = []
+    def create_palette_from_selection(self, num_palette_swatches, colours,
+                                    show_hex_code, text_color):
         objects = []
+        
+        sel = self.svg.selected
+        if (sel is not None):
+            bbox = sel.bounding_box()
 
-        with PIL.Image.open(image_filename) as im:
-            colors = get_palette_colors(im, max_colours=num_palette_swatches, ignore_white=ignore_white_in_palette)
+            box_width = bbox.width / num_palette_swatches
+            box_height = bbox.height
 
-        page_width = self.svg.viewbox_width
-        page_height = self.svg.viewbox_height
+            for index in range(num_palette_swatches):
+                col = colours[index]
+                colHex = rgb2hex(col)
 
-        self.create_palette_from_selection(num_palette_swatches, colors)
-        return
+                colStyle = {'fill' : colHex}
+                
+                x_pos = bbox.left + (index * box_width)
+                y_pos = bbox.top
 
+                objects.append(self.rect((x_pos, y_pos), (box_width, box_height), round=0, style=colStyle))
+
+                # Optionally, include the hex code on the swatch.
+                if show_hex_code is True:
+                    color = text_color.to_rgb()
+                    new_col = (color[0], color[1], color[2])
+
+                    font_style = {'fill': rgb2hex(new_col),
+                                'font-style' : 'normal',
+                                'font-weight' : 'normal',
+                                'font-size' : '5px',
+                                'font-family' : 'sans-serif',
+                                'text-align': 'center',
+                                'vertical-align': 'top',
+                                'text-anchor': 'middle'}
+
+                    text_x_pos = x_pos + (box_width / 2)
+                    text_y_pos = y_pos - 3
+
+                    objects.append(self.text(colHex, (text_x_pos, text_y_pos), style=font_style))
+        
+        return objects
+
+    def create_standalone_palette(self, colors, orientation, swatch_size, swatch_spacing,
+                                    show_hex_code, text_color):
+        objects = []
         index = 0
 
         for col in colors:
             colHex = rgb2hex(col)
             colStyle = {'fill' : colHex}
 
+            # Add just a bit of flare!
+            radius = 2
+
             x_pos = 0
             y_pos = 0
+
+            page_width = self.svg.viewbox_width
+            page_height = self.svg.viewbox_height
 
             # Sort out our x/y positions based on the orientation selected.
             if (orientation == "Top"):
@@ -206,6 +218,32 @@ class PaletteGeneratorExtension(inkex.GenerateExtension):
                 objects.append(self.text(colHex, (text_x_pos, text_y_pos), style=font_style))
             
             index+=1
+
+        return objects
+
+    def generate(self):
+        swatch_size = self.options.swatchSize
+        swatch_spacing = self.options.swatchSpacing
+        image_filename = self.options.imagePath
+        show_hex_code = self.options.showHexCode
+        ignore_white_in_palette = self.options.ignoreWhiteInPalette
+        num_palette_swatches = self.options.numPaletteSwatches
+        orientation = self.options.orientation
+        text_color = self.options.textColor
+        use_selection = self.options.useSelection
+
+        colors = []
+        objects = []
+
+        with PIL.Image.open(image_filename) as im:
+            colors = get_palette_colors(im, max_colours=num_palette_swatches, ignore_white=ignore_white_in_palette)
+
+        # Use a selected rectangle and fill it in with the palette swatches.
+        # This doesn't use the sizes specified.
+        if use_selection is True:
+            objects = self.create_palette_from_selection(num_palette_swatches, colors, show_hex_code, text_color)
+        else:
+            objects = self.create_standalone_palette(colors, orientation, swatch_size, swatch_spacing, show_hex_code, text_color)
 
         for o in objects:
             yield o

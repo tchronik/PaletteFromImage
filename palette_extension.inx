@@ -18,6 +18,8 @@
   <vbox>
     <label>Palette Options</label>
     <separator />
+    <param name="useSelection" type="bool" gui-text="Use Selection For Palette">false</param>
+    <separator />
     <param name="ignoreWhiteInPalette" type="bool" gui-text="Ignore White In Palette">true</param>
     <param name="orientation" gui-text="Palette Orientation:" type="optiongroup" appearance="radio">
       <option translatable="no" value="Top">Top</option>
