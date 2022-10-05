@@ -24,12 +24,12 @@ In theory, any image can be used to generate a palette from. However, there is c
 
 Here is an example of the colour palette used to produce the below image.
 
-![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/ExamplePalette.jpeg?raw=true)
+![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/media/ExamplePalette.jpeg?raw=true)
 
 Options
 ------------
 
-![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/PaletteFromImage_Options.PNG?raw=true)
+![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/media/PaletteFromImage_Options.PNG?raw=true)
 
 ## Swatch Options
 
@@ -54,8 +54,8 @@ Options
 Screenshot
 ------------
 
-![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/PaletteFromImage.PNG?raw=true)
+![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/media/PaletteFromImage.PNG?raw=true)
 
 You are also able to create a palette using an existing inkscape object as a template for your palette. In the screenshot below, this is a simple rectangle stretched across that then gets filled in with a palette. I tested this with a circle as well and it works, but the layout of the palette doesn't conform to the curves.
 
-![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/PaletteFromImage_Selection.PNG?raw=true)
+![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/media/PaletteFromImage_Selection.PNG?raw=true)
