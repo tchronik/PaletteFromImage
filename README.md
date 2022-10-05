@@ -22,6 +22,6 @@ Screenshot
 
 ![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/PaletteFromImage.PNG?raw=true)
 
-You are also able to create a palette using an existing inkscape object as a template for the layout of your palette. In the screenshot below, this is a simple rectangle stretched across that then gets filled in with a palette. I tested this with a circle as well and it works, but the layout of the palette doesn't conform to the curves.
+You are also able to create a palette using an existing inkscape object as a template for your palette. In the screenshot below, this is a simple rectangle stretched across that then gets filled in with a palette. I tested this with a circle as well and it works, but the layout of the palette doesn't conform to the curves.
 
 ![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/PaletteFromImage_Selection.PNG?raw=true)
