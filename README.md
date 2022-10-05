@@ -15,7 +15,32 @@ Save these files on your PC under this path:
 
 C:\Users\<your username>\AppData\Roaming\inkscape\extensions
 
-In Inkscape, under extensions, go to Image -> Palette From Image...
+Then in Inkscape, under extensions, go to Image -> Palette From Image...
+
+Options
+------------
+
+![alt text](https://github.com/tchronik/PaletteFromImage/blob/main/PaletteFromImage_Options.PNG?raw=true)
+
+## Swatch Options
+
+**Swatch Size** - Size of the swatch rectangle you want on-screen.
+
+**Swatch Spacing** - How much spacing do you want between the swatches.
+
+**Num Swatches In Palette** - How many total colours you want in your final palette.
+
+**Show Hex Code & Text Colour** - Choose wether the hex code text sits above the swatches.
+
+## Palette Options
+
+**Use Selection For Palette** - Choose whether you want to use the active selections bounding box to generate a template for the palette. This will ignore swatch sizing and spacing in the swatch options.
+
+**Ignore White From Palette** - Choose whether you want to ignore the colour white in the image. Certain images are saved with swatches on a stark white background. This might be undesirable when generating the palette as this colour would be considered "widely used".
+
+**Palette Orientation** - Choose which side of the active page you want the palette to be created.
+
+**Image Path** - Path to the image you want to load. This will be the image sampled to generate the palette based on the most used colours in the image.
 
 Screenshot
 ------------
